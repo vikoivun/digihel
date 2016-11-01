@@ -11,6 +11,8 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 
+from search.fields import tag_search_field
+
 
 class BaseModel(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('Name'))
@@ -95,7 +97,8 @@ class KehmetContentPage(RelativeURLMixin, Page):
         StreamFieldPanel('body'),
     ]
     search_fields = Page.search_fields + [
-        index.SearchField('body')
+        index.SearchField('body'),
+        tag_search_field,
     ]
 
     parent_page_types = ['KehmetContentPage', 'KehmetFrontPage']
